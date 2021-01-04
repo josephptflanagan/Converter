@@ -1,0 +1,50 @@
+Header{
+    margin: auto;
+    width: 50%;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
+    width: 75%;
+}
+
+h2{
+    margin: auto;
+    width: 75%;
+}
+
+h3{
+    margin: auto;
+    width: 75%;
+}
+
+.sectionHeader{
+    margin: auto;
+    width: 50%;
+}
+
+.convertorSection{
+    display:block;
+    border: solid black 2px;
+    border-radius: 5px;
+}
+
+.convertors{
+    display: flex;
+}
+
+.convertorCard{
+    display: block;
+    width: 50%;
+    margin: 5px;
+    padding: 5px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.convertorCardHeader{
+    margin: auto;
+    margin-bottom: 5px;
+    width: 50%;
+}
