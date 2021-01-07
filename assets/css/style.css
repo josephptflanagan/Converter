@@ -37,6 +37,10 @@ h3{
     width: 50%;
 }
 
+.convertorSection{
+    margin-bottom: 5px;
+}
+
 .binaryToDecimalToBinaryConvertorSection{
     display:block;
     border: solid white 2px;
@@ -45,12 +49,19 @@ h3{
     
 }
 
+.hexToRGBToHSL{
+    display:block;
+    border: solid white 2px;
+    border-radius: 5px;
+    background-image: linear-gradient(to right,#99ff66, #cc66ff);
+}
+
 .convertors{
     display: flex;
 
 }
 
-.convertorCard{
+.convertorCard-2{
     display: block;
     width: 50%;
     margin: 5px;
@@ -59,7 +70,17 @@ h3{
     color: silver;
     border-radius: 5px;
     background-color: #1a1a1a;
+}
 
+.convertorCard-3{
+    display: block;
+    width: 33%;
+    margin: 5px;
+    padding: 10px;
+    border: 1px silver solid;
+    color: silver;
+    border-radius: 5px;
+    background-color: #1a1a1a;
 }
 
 .convertorCardHeader{
