@@ -1,11 +1,28 @@
 const binaryToDecimalButton = document.getElementById('bToDButton');
 const decimalToBinaryButton = document.getElementById('dToBButton');
 
+const hexToRGBToHSLButton = document.getElementById('hexToRGBToHSLButton');
+const RGBToHSLToHexButton = document.getElementById('RGBToHSLToHexButton');
+const HSLToHexToRGBButton = document.getElementById('HSLToHexToRGBButton');
+
 let binaryToDecimalInput = document.getElementById('bToDInput');
 let decimalToBinaryInput = document.getElementById('dToBInput');
 let binaryToDecimalAnswer = document.getElementById('bToDAnswer');
 let decimalToBinaryAnswer = document.getElementById('dToBAnswer');
 
+let hexToRGBToHSLInput = document.getElementById('hexToRGBToHSLInput')
+let RToHSLToHexInput = document.getElementById('RToHSLToHexInput');
+let GToHSLToHexInput = document.getElementById('GToHSLToHexInput');
+let BToHSLToHexInput = document.getElementById('BToHSLToHexInput');
+let HToHexToRGBInput = document.getElementById('HToHexToRGBInput');
+let SToHexToRGBInput = document.getElementById('SToHexToRGBInput');
+let LToHexToRGBInput = document.getElementById('LToHexToRGBInput');
+let hexToRGBAnswer = document.getElementById('hexToRGBAnswer');
+let hexToHSLAnswer = document.getElementById('hexToHSLAnswer');
+let RGBToHSLAnswer = document.getElementById('RGBToHSLAnswer');
+let RGBToHexAnswer = document.getElementById('RGBToHexAnswer');
+let HSLToHexAnswer = document.getElementById('HSLToHexAnswer');
+let HSLToRGBAnswer = document.getElementById('HSLToRGBAnswer');
 
 //BINARY TO DECIMAL START
 function binaryToDecimal(event) {
@@ -180,3 +197,6 @@ function decimalToBinary(event) {
 
 binaryToDecimalButton.addEventListener("click", binaryToDecimal);
 decimalToBinaryButton.addEventListener("click", decimalToBinary);
+hexToRGBToHSLButton.addEventListener("click", hexToRGBToHSL);
+RGBToHSLToHexButton.addEventListener("click", RGBToHSLToHex);
+HSLToHexToRGBButton.addEventListener("click", HSLTohexToRGB);
