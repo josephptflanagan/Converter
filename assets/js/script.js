@@ -26,7 +26,7 @@ let HSLToRGBAnswer = document.getElementById('HSLToRGBAnswer');
 
 //BINARY TO DECIMAL START
 function binaryToDecimal(event) {
-    
+
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
 
@@ -58,7 +58,7 @@ function binaryToDecimal(event) {
             binaryToDecimalAnswer.innerHTML = "Your Binary Number as a Decimal Number: " + decimalNum;
         }
         //if the input is not a binary number
-        else{            
+        else {
             binaryToDecimalAnswer.innerHTML = "Input must be a binary number (1s and 0s)";
         }
 
@@ -67,10 +67,10 @@ function binaryToDecimal(event) {
 };
 //BINARY TO DECIMAL END
 
-//DECIMAL TO BINARY CONVERTOR START
+//DECIMAL TO BINARY START
 function decimalToBinary(event) {
 
-     //prevents the page from refreshing when clicking the submit button
+    //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
 
     //This algorithm works by checking increasingly large exponents of 2 against the number. 
@@ -101,7 +101,7 @@ function decimalToBinary(event) {
     //checks that there is user input before proceeding
     if (decimalNum) {
 
-         //checks that this input is a decimal number
+        //checks that this input is a decimal number
         if (decimalNum.match(decimalRegex)) {
 
             //immediately ejects 0
@@ -159,8 +159,8 @@ function decimalToBinary(event) {
                         }
 
                         //a catch for exponents of 2 that cause a mistake in the algorithm otherwise. I will endeavor to figure out why, but without this 2,4,8,16, etc... come out one digit short
-                        if(first && decimalNum == 0){
-                            binaryNum[binaryNum.length-1]= "0";
+                        if (first && decimalNum == 0) {
+                            binaryNum[binaryNum.length - 1] = "0";
                             binaryNum.push("1");
                         }
 
@@ -193,6 +193,104 @@ function decimalToBinary(event) {
     }
 
 };
+//DECIMAL TO BINARY END
+
+//HEX ALPHA TO NUMBER START
+function hexAlphaToDecimal(alpha){
+    let tempNumber = 0;
+    alpha = alpha.toLowerCase();
+    switch (alpha) {
+        case 'a':
+            tempNumber = 10;
+            break;
+        case 'b':
+            tempNumber = 11;
+            break;
+        case 'c':
+            tempNumber = 12;
+            break;
+        case 'd':
+            tempNumber = 13;
+            break;
+        case 'e':
+            tempNumber = 14;
+            break;
+        case 'f':
+            tempNumber = 15;
+            break;
+        default:
+            console.log('Error')
+    }
+
+    return tempNumber;
+
+}
+//HEX ALPHA TO NUMBER END
+
+//HEX TO RGB TO HSL START
+function hexToRGBToHSL(event) {
+
+    //prevents the page from refreshing when clicking the submit button
+    event.preventDefault();
+
+    //grabs the user input value
+    let hexValue = hexToRGBToHSLInput.value;
+    let RGB = ["", "", ""];
+
+    //regex to check and ensure the value is a hex value
+    let hexRegex = /^#?([a-f0-9]{6}|[a-f0-9]{3})$/;
+    let decimalRegex = /[0-9]{1}/;
+
+    if (hexValue) {
+
+        if (hexValue.match(hexRegex)) {
+
+            if (hexValue.length == 3) {
+
+                let tempHex = "";
+                tempHex = hexValue[0] + hexValue[0] + hexValue[1] + hexValue[1] + hexValue[2] + hexValue[2];
+                hexValue = tempHex;
+            }
+
+            let subA = hexValue.slice(0, 2);
+            let subB = hexValue.slice(2, 4);
+            let subC = hexValue.slice(4);
+            let subSections = [subA, subB, subC];
+
+            for (let i = 0; i < subSections.length; i++) {
+
+                let tempSub = 0;
+                let tempMultiplier = 0;
+
+                if (subSections[i][0].match(decimalRegex)) {
+                    tempSub += (16 * Number(subSections[i][0]))
+                }
+                else {
+                    tempMultiplier = hexAlphaToDecimal(subSections[i][0]);
+                    tempSub += (16 * tempMultiplier)
+                }
+
+                if(subSections[i][1].match(decimalRegex)){
+                    tempSub += Number(subSections[i][1])
+                }
+                else{
+                    tempSub += hexAlphaToDecimal(subSections[i][1])
+                }
+                
+                RGB[i] = tempSub;
+            }
+
+            hexToRGBAnswer.innerHTML = "Your hex value as an RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
+
+        }
+        else {
+            hexToRGBAnswer.innerHTML = "Input must be a hex value (3 or 6 hexadecimal values)";
+            hexToHSLAnswer.innerHTML = "Input must be a hex value (3 or 6 hexadecimal values)";
+        }
+
+    }
+}
+//HEX TO RGB TO HSL END
 
 
 binaryToDecimalButton.addEventListener("click", binaryToDecimal);
