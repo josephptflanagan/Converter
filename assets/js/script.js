@@ -195,37 +195,8 @@ function decimalToBinary(event) {
 };
 //DECIMAL TO BINARY END
 
-//HEX ALPHA TO NUMBER START
-function hexAlphaToDecimal(alpha){
-    let tempNumber = 0;
-    alpha = alpha.toLowerCase();
-    switch (alpha) {
-        case 'a':
-            tempNumber = 10;
-            break;
-        case 'b':
-            tempNumber = 11;
-            break;
-        case 'c':
-            tempNumber = 12;
-            break;
-        case 'd':
-            tempNumber = 13;
-            break;
-        case 'e':
-            tempNumber = 14;
-            break;
-        case 'f':
-            tempNumber = 15;
-            break;
-        default:
-            console.log('Error')
-    }
-
-    return tempNumber;
-
-}
-//HEX ALPHA TO NUMBER END
+const hexToDecimalDictionary = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15};
+const decimalToHexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
 
 //HEX TO RGB TO HSL START
 function hexToRGBToHSL(event) {
@@ -238,8 +209,7 @@ function hexToRGBToHSL(event) {
     let RGB = ["", "", ""];
 
     //regex to check and ensure the value is a hex value
-    let hexRegex = /^#?([a-f0-9]{6}|[a-f0-9]{3})$/;
-    let decimalRegex = /[0-9]{1}/;
+    let hexRegex = /^([a-f0-9]{6}|[a-f0-9]{3})$/;
 
     if (hexValue) {
 
@@ -258,29 +228,10 @@ function hexToRGBToHSL(event) {
             let subSections = [subA, subB, subC];
 
             for (let i = 0; i < subSections.length; i++) {
-
-                let tempSub = 0;
-                let tempMultiplier = 0;
-
-                if (subSections[i][0].match(decimalRegex)) {
-                    tempSub += (16 * Number(subSections[i][0]))
-                }
-                else {
-                    tempMultiplier = hexAlphaToDecimal(subSections[i][0]);
-                    tempSub += (16 * tempMultiplier)
-                }
-
-                if(subSections[i][1].match(decimalRegex)){
-                    tempSub += Number(subSections[i][1])
-                }
-                else{
-                    tempSub += hexAlphaToDecimal(subSections[i][1])
-                }
-                
-                RGB[i] = tempSub;
+                RGB[i] = (16 * hexToDecimalDictionary[subSections[i][0]]) + hexToDecimalDictionary[subSections[i][1]];
             }
 
-            hexToRGBAnswer.innerHTML = "Your hex value as an RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
+            hexToRGBAnswer.innerHTML = "Your hex value as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
 
         }
         else {
@@ -291,6 +242,59 @@ function hexToRGBToHSL(event) {
     }
 }
 //HEX TO RGB TO HSL END
+
+//RGB TO HSL TO HEX START
+function RGBToHSLToHex(event) {
+
+    //prevents the page from refreshing when clicking the submit button
+    event.preventDefault();
+
+    //grabs the user input value
+    let rValue = RToHSLToHexInput.value;
+    let gValue = GToHSLToHexInput.value;
+    let bValue = BToHSLToHexInput.value;
+
+    console.log("rValue: ", rValue);
+    console.log("gValue: ", gValue);
+    console.log("bValue: ", bValue);
+
+    let RGB = [rValue, gValue, bValue];
+
+    let hexValue = "";
+
+    //regex to check and ensure the value is an RGB value
+    let RGBRegex = /[0-9]{1,2}|2[0-4][0-9]|25[0-5]/;
+
+    if (rValue && gValue && bValue) {
+
+        if (rValue.match(RGBRegex) && gValue.match(RGBRegex) && bValue.match(RGBRegex)){
+
+            for(let i = 0; i < RGB.length; i++){
+                console.log("hexValue: ", hexValue);
+                hexValue += decimalToHexArray[(RGB[i] - (RGB[i] % 16)) / 16]
+                hexValue += decimalToHexArray[(RGB[i] % 16)]
+            }
+
+            console.log("hexValue: ", hexValue);
+
+            RGBToHexAnswer.innerHTML = "Your RGB code as a hex value: " + hexValue;
+
+        }
+        else{
+            RGBToHSLAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
+            RGBToHexAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
+        }
+
+    }
+
+}
+//RGB TO HSL TO HEX END
+
+//HSL TO HEX TO RGB START
+function HSLTohexToRGB(event){
+
+}
+//HSL TO HEX TO RGB END
 
 
 binaryToDecimalButton.addEventListener("click", binaryToDecimal);
