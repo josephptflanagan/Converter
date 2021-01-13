@@ -10,4 +10,4 @@ A basic convertor, starting with binary to decimal and decimal to binary convers
 This Convertor could be handled by built in functionality of Javascript, but I wanted to see if I could figure out the algorithm myself, and I believe I have.
 
 ## Hex to RGB to HSL Convertor
-Working on this one at the moment, Hex to RGB is now functional, RGB to hex too. Anything with HSL is going to take a little while longer as I have to figure out exactly how those values exchange with either Hex or RGB. I will have to refactor the code to modularize it before moving on to HSL.
+Working on this one at the moment, hex to RGB, RGB to hex, HSL to RGB, HSL to Hex all working. Working on Hex and RGB to HSL. There is also an issue with the regex checking in RGB to Hex at the moment I need to work out. 

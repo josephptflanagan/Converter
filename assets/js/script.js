@@ -195,11 +195,98 @@ function decimalToBinary(event) {
 };
 //DECIMAL TO BINARY END
 
-const hexToDecimalDictionary = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15};
+const hexToDecimalDictionary = { "0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15 };
 const decimalToHexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
 
+//HEX TO RGB START
+function hexToRGBConversion(hexValue) {
+
+    if (hexValue.length == 3) {
+        let tempHex = "";
+        tempHex = hexValue[0] + hexValue[0] + hexValue[1] + hexValue[1] + hexValue[2] + hexValue[2];
+        hexValue = tempHex;
+    }
+
+    let subA = hexValue.slice(0, 2);
+    let subB = hexValue.slice(2, 4);
+    let subC = hexValue.slice(4);
+    let subSections = [subA, subB, subC];
+
+    for (let i = 0; i < subSections.length; i++) {
+        subSections[i] = (16 * hexToDecimalDictionary[subSections[i][0]]) + hexToDecimalDictionary[subSections[i][1]];
+    }
+
+    return subSections;
+
+}
+//HEX TO RGB END
+
+//RGB TO HEX START
+function RGBToHexConversion(RGB) {
+
+    let hexValue = "";
+
+    for (let i = 0; i < RGB.length; i++) {
+        hexValue += decimalToHexArray[(RGB[i] - (RGB[i] % 16)) / 16]
+        hexValue += decimalToHexArray[(RGB[i] % 16)]
+    }
+
+    return hexValue;
+
+}
+//RGB TO HEX END
+
+//HSL TO RGB START
+function HSLToRGBConversion(HSL) {
+
+    let hue = Number(HSL[0]);
+    let saturation = Number(HSL[1]);
+    let lightness = Number(HSL[2]);
+
+    if (hue == 360) {
+        hue = 0;
+    }
+
+    let RGB = [0,0,0];
+
+    let chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
+    let x = chroma * (1 - Math.abs(((hue / 60) % 2) - 1))
+    let lightnessMatch = lightness - chroma / 2
+
+    switch (true) {
+        case /* hue >= 0 && */ hue < 60:
+            RGB = [chroma, x, 0];
+            break;
+        case /* hue >= 60 && */ hue < 120:
+            RGB = [x, chroma, 0];
+            break;
+        case /* hue >= 120 && */ hue < 180:
+            RGB = [0, chroma, x];
+            break;
+        case /* hue >= 180 && */ hue < 240:
+            RGB = [0, x, chroma];
+            break;
+        case /* hue >= 240 && */ hue < 300:
+            RGB = [x, 0, chroma];
+            break;
+        case /* hue >= 300 && */ hue < 360:
+            RGB = [chroma, 0, x];
+            break;
+        default:
+            console.log("something went wrong at hue switch");
+    }
+
+    for (let i = 0; i < RGB.length; i++){
+        RGB[i] = Math.round((RGB[i] + lightnessMatch) * 255); 
+    }
+
+    return RGB;
+
+}
+//HSL TO RGB END
+
 //HEX TO RGB TO HSL START
-function hexToRGBToHSL(event) {
+function hexToRGBToHSLController(event) {
 
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
@@ -207,6 +294,7 @@ function hexToRGBToHSL(event) {
     //grabs the user input value
     let hexValue = hexToRGBToHSLInput.value;
     let RGB = ["", "", ""];
+    //let HSL = ["", "", ""];
 
     //regex to check and ensure the value is a hex value
     let hexRegex = /^([a-f0-9]{6}|[a-f0-9]{3})$/;
@@ -215,29 +303,13 @@ function hexToRGBToHSL(event) {
 
         if (hexValue.match(hexRegex)) {
 
-            if (hexValue.length == 3) {
+            RGB = hexToRGBConversion(hexValue);
 
-                let tempHex = "";
-                tempHex = hexValue[0] + hexValue[0] + hexValue[1] + hexValue[1] + hexValue[2] + hexValue[2];
-                hexValue = tempHex;
-            }
-
-            //HEX TO RGB START
-            let subA = hexValue.slice(0, 2);
-            let subB = hexValue.slice(2, 4);
-            let subC = hexValue.slice(4);
-            let subSections = [subA, subB, subC];
-
-            for (let i = 0; i < subSections.length; i++) {
-                RGB[i] = (16 * hexToDecimalDictionary[subSections[i][0]]) + hexToDecimalDictionary[subSections[i][1]];
-            }
+            //HSL = hexToHSLConversion(hexValue);
 
             hexToRGBAnswer.innerHTML = "Your hex value as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
-            //HEX TO RGB END
+            //hexToHSLAnswer.innerHTML = "Your hex value as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + " L:" + HSL[2];
 
-            //HEX TO HSL START
-
-            //HEX TO HSL END
         }
         else {
             hexToRGBAnswer.innerHTML = "Input must be a hex value (3 or 6 hexadecimal values)";
@@ -249,7 +321,7 @@ function hexToRGBToHSL(event) {
 //HEX TO RGB TO HSL END
 
 //RGB TO HSL TO HEX START
-function RGBToHSLToHex(event) {
+function RGBToHSLToHexController(event) {
 
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
@@ -272,24 +344,14 @@ function RGBToHSLToHex(event) {
         console.log("gValue.match(RGBRegex): ", gValue.match(RGBRegex));
         console.log("bValue.match(RGBRegex): ", bValue.match(RGBRegex));
 
-        if (rValue.match(RGBRegex) && gValue.match(RGBRegex) && bValue.match(RGBRegex)){
+        if (rValue.match(RGBRegex) && gValue.match(RGBRegex) && bValue.match(RGBRegex)) {//THIS CHECK IS NOT WORKING AS INTENDED, INVESTIGATE
 
-
-            //RGB TO HEX START
-            for(let i = 0; i < RGB.length; i++){
-                hexValue += decimalToHexArray[(RGB[i] - (RGB[i] % 16)) / 16]
-                hexValue += decimalToHexArray[(RGB[i] % 16)]
-            }
+            hexValue = RGBToHexConversion(RGB);
 
             RGBToHexAnswer.innerHTML = "Your RGB code as a Hex value: " + hexValue;
-            //RGB TO HEX END
-
-            //RGB TO HSL START
-
-            //RGB TO HSL END
 
         }
-        else{
+        else {
             RGBToHSLAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
             RGBToHexAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
         }
@@ -300,21 +362,33 @@ function RGBToHSLToHex(event) {
 //RGB TO HSL TO HEX END
 
 //HSL TO HEX TO RGB START
-function HSLToHexToRGB(event){
+function HSLToHexToRGBController(event) {
+    
+    //prevents the page from refreshing when clicking the submit button
+    event.preventDefault();
 
+    //grabs the user input value
     let hValue = HToHexToRGBInput.value;
     let sValue = SToHexToRGBInput.value;
     let lValue = LToHexToRGBInput.value;
 
-    let chroma = (1 - Math.abs(2*lValue -1)) * sValue;
-    let X = chroma * (1 - Math.abs(((hValue/60)%2)-1))
-    let lightnessMatch = lValue - chroma/2
+    let HSL = [hValue, sValue, lValue];
+    let RGB = ["", "", ""]
+    let hexValue = "";
 
-    
+    if (hValue && sValue && lValue) {
 
+        if ((hValue >= 0 && hValue <= 360) && (sValue >= 0 && sValue <= 1) && (lValue >= 0 && lValue <= 1)) {
 
+            RGB = HSLToRGBConversion(HSL);
+            hexValue = RGBToHexConversion(RGB);
 
+            HSLToRGBAnswer.innerHTML = "Your HSL code as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
+            HSLToHexAnswer.innerHTML = "Your HSL code as a Hex value: " + hexValue;
 
+        }
+
+    }
 
 }
 //HSL TO HEX TO RGB END
@@ -322,6 +396,6 @@ function HSLToHexToRGB(event){
 
 binaryToDecimalButton.addEventListener("click", binaryToDecimal);
 decimalToBinaryButton.addEventListener("click", decimalToBinary);
-hexToRGBToHSLButton.addEventListener("click", hexToRGBToHSL);
-RGBToHSLToHexButton.addEventListener("click", RGBToHSLToHex);
-HSLToHexToRGBButton.addEventListener("click", HSLToHexToRGB);
+hexToRGBToHSLButton.addEventListener("click", hexToRGBToHSLController);
+RGBToHSLToHexButton.addEventListener("click", RGBToHSLToHexController);
+HSLToHexToRGBButton.addEventListener("click", HSLToHexToRGBController);
