@@ -1,28 +1,38 @@
 const binaryToDecimalButton = document.getElementById('bToDButton');
 const decimalToBinaryButton = document.getElementById('dToBButton');
 
-const hexToRGBToHSLButton = document.getElementById('hexToRGBToHSLButton');
-const RGBToHSLToHexButton = document.getElementById('RGBToHSLToHexButton');
-const HSLToHexToRGBButton = document.getElementById('HSLToHexToRGBButton');
+const hexButton = document.getElementById('hexButton');
+const RGBButton = document.getElementById('RGBButton');
+const HSLButton = document.getElementById('HSLButton');
+const HSVButton = document.getElementById('HSVButton');
 
 let binaryToDecimalInput = document.getElementById('bToDInput');
 let decimalToBinaryInput = document.getElementById('dToBInput');
+
 let binaryToDecimalAnswer = document.getElementById('bToDAnswer');
 let decimalToBinaryAnswer = document.getElementById('dToBAnswer');
 
-let hexToRGBToHSLInput = document.getElementById('hexToRGBToHSLInput')
-let RToHSLToHexInput = document.getElementById('RToHSLToHexInput');
-let GToHSLToHexInput = document.getElementById('GToHSLToHexInput');
-let BToHSLToHexInput = document.getElementById('BToHSLToHexInput');
-let HToHexToRGBInput = document.getElementById('HToHexToRGBInput');
-let SToHexToRGBInput = document.getElementById('SToHexToRGBInput');
-let LToHexToRGBInput = document.getElementById('LToHexToRGBInput');
+let hexInput = document.getElementById('hexInput')
+let RInput = document.getElementById('RInput');
+let GInput = document.getElementById('GInput');
+let BInput = document.getElementById('BInput');
+let HSLHInput = document.getElementById('HSLHInput');
+let HSLSInput = document.getElementById('HSLSInput');
+let HSLLInput = document.getElementById('HSLLInput');
+let HSVHInput = document.getElementById('HSVHInput');
+let HSVSInput = document.getElementById('HSVSInput');
+let HSVVInput = document.getElementById('HSVVInput');
+
 let hexToRGBAnswer = document.getElementById('hexToRGBAnswer');
 let hexToHSLAnswer = document.getElementById('hexToHSLAnswer');
+let hexToHSVAnswer = document.getElementById('hexToHSVAnswer');
 let RGBToHSLAnswer = document.getElementById('RGBToHSLAnswer');
 let RGBToHexAnswer = document.getElementById('RGBToHexAnswer');
+let RGBToHSVAnswer = document.getElementById('RGBToHSVAnswer');
 let HSLToHexAnswer = document.getElementById('HSLToHexAnswer');
 let HSLToRGBAnswer = document.getElementById('HSLToRGBAnswer');
+let HSLToHSVAnswer = document.getElementById('HSLToHSVAnswer');
+
 
 //BINARY TO DECIMAL START
 function binaryToDecimal(event) {
@@ -358,16 +368,63 @@ function RGBToHSLConversion(RGB) {
 }
 //RGB TO HSL END
 
-//HEX TO RGB TO HSL START
-function hexToRGBToHSLController(event) {
+
+//HSV TO HSL START
+function HSVToHSLConversion(HSV){
+
+    let hue = HSV[0];
+    let saturation = HSV[1];
+    let value = HSV[2];
+
+    let HSLhue = hue;
+    let HSLsaturation = 0;
+    let lightness = 0;
+
+}
+//HSV TO HSL END
+
+//HSL TO HSV START
+function HSLToHSVConversion(HSL){
+
+    let hue = HSL[0];
+    let saturation = HSL[1];
+    let lightness = HSL[2];
+
+    let HSVhue = hue;
+    let HSVsaturation = 0;
+    let value = 0;
+
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    //I WAS HERE
+    value = lightness + saturat
+
+}
+//HSL TO HSV END
+
+//HEX INPUT START
+function hexController(event) {
 
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
 
     //grabs the user input value
-    let hexValue = hexToRGBToHSLInput.value;
+    let hexValue = hexInput.value;
     let RGB = ["", "", ""];
     let HSL = ["", "", ""];
+    let HSV = ["", "", ""];
 
     //regex to check and ensure the value is a hex value
     let hexRegex = /^([a-f0-9]{6}|[a-f0-9]{3})$/;
@@ -390,22 +447,23 @@ function hexToRGBToHSLController(event) {
 
     }
 }
-//HEX TO RGB TO HSL END
+//HEX INPUT END
 
-//RGB TO HSL TO HEX START
-function RGBToHSLToHexController(event) {
+//RGB INPUT START
+function RGBController(event) {
 
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
 
     //grabs the user input value
-    let rValue = RToHSLToHexInput.value;
-    let gValue = GToHSLToHexInput.value;
-    let bValue = BToHSLToHexInput.value;
+    let rValue = RInput.value;
+    let gValue = GInput.value;
+    let bValue = BInput.value;
 
     let RGB = [rValue, gValue, bValue];
 
     let HSL = ["", "", ""];
+    let HSV = ["", "", ""];
     let hexValue = "";
 
     if (rValue && gValue && bValue) {
@@ -432,21 +490,21 @@ function RGBToHSLToHexController(event) {
     }
 
 }
-//RGB TO HSL TO HEX END
+//RGB INPUT END
 
-//HSL TO HEX TO RGB START
-function HSLToHexToRGBController(event) {
+//HSL INPUT START
+function HSLController(event) {
 
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
 
     //grabs the user input value
-    let hValue = HToHexToRGBInput.value;
-    let sValue = SToHexToRGBInput.value;
-    let lValue = LToHexToRGBInput.value;
+    let hValue = HSLHInput.value;
+    let sValue = HSLSInput.value;
+    let lValue = HSLLInput.value;
 
     let HSL = [hValue, sValue, lValue];
-    let RGB = ["", "", ""]
+    let RGB = ["", "", ""];
     let hexValue = "";
 
     if (hValue && sValue && lValue) {
@@ -472,10 +530,54 @@ function HSLToHexToRGBController(event) {
     }
 
 }
-//HSL TO HEX TO RGB END
+//HSL INPUT END
+
+//HSV INPUT START
+function HSVController(event) {
+
+    //prevents the page from refreshing when clicking the submit button
+    event.preventDefault();
+
+    //grabs the user input value
+    let hValue = HSVHInput.value;
+    let sValue = HSVSInput.value;
+    let vValue = HSVVInput.value;
+
+    let HSV = [hValue, sValue, vValue];
+    let HSL = ["", "", ""];
+    let RGB = ["", "", ""];
+    let hexValue = "";
+
+    if (hValue && sValue && vValue) {
+
+        for (let i = 1; i < HSV.length; i++) {
+
+            if(HSV[i] > 1 && HSV[i] <=100){
+                HSV[i] = HSV[i] / 100;
+            }
+
+        }
+
+        if ((HSV[0] >= 0 && HSV[0] <= 360) && (HSV[1] >= 0 && HSV[1] <= 1) && (HSV[2] >= 0 && HSV[2] <= 1)) {
+
+            HSL = HSVToHSLConversion(HSV);
+            RGB = HSLToRGBConversion(HSL);
+            hexValue = RGBToHexConversion(RGB);
+
+            HSVToRGBAnswer.innerHTML = "Your HSV code as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
+            HSVToHexAnswer.innerHTML = "Your HSV code as a Hex value: " + hexValue;
+            HSVToHSLAnswer.innerHTML = "Your HSV code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + " L:" + HSL[2];
+
+        }
+
+    }
+
+}
+//HSV INPUT END
 
 binaryToDecimalButton.addEventListener("click", binaryToDecimal);
 decimalToBinaryButton.addEventListener("click", decimalToBinary);
-hexToRGBToHSLButton.addEventListener("click", hexToRGBToHSLController);
-RGBToHSLToHexButton.addEventListener("click", RGBToHSLToHexController);
-HSLToHexToRGBButton.addEventListener("click", HSLToHexToRGBController);
+hexButton.addEventListener("click", hexController);
+RGBButton.addEventListener("click", RGBController);
+HSLButton.addEventListener("click", HSLController);
+HSVButton.addEventListener("click", HSVController);

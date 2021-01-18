@@ -45,63 +45,85 @@
     </section>
     <!--BINARY TO DECIMAL TO BINARY END-->
 
-    <!--HEX TO RGB TO HSL START-->
-    <section class="hexToRGBToHSL convertorSection" id="hexToRGBToHSL">
+    <!--COLOR CONVERTOR START-->
+    <section class="colorConvertor convertorSection" id="colorConvertor">
         <div class="sectionHeader">
-            <h2>Hex to RGB to HSL
+            <h2>Color Convertor
         </div>
         <div class="convertors">
-            <div class="convertorCard-3">
+            <div class="convertorCard-4">
                 <div class="convertorCardHeader">
-                    <h3>Hex to RGB and HSL</h3>
+                    <h3>Hex to RGB, HSL, and HSV</h3>
                 </div>
                 <form>
-                    <label for="hexToRGBToHSLInput">Enter your hex value: #</label>
-                    <input type="text" id="hexToRGBToHSLInput" maxlength="6">
-                    <button type="click" id="hexToRGBToHSLButton">Convert</button>
+                    <label for="hexInput">Enter your hex value: #</label>
+                    <input type="text" id="hexInput" maxlength="6">
+                    <button type="click" id="hexButton">Convert</button>
                     <p id="hexToRGBAnswer">Your hex value as a RGB code: </p>
                     <p id="hexToHSLAnswer">Your hex value as a HSL code: </p>
+                    <p id="hexToHSVAnswer">Your hex value as a HSV code: </p>
                 </form>
             </div>
-            <div class="convertorCard-3">
+            <div class="convertorCard-4">
                 <div class="convertorCardHeader">
-                    <h3>RGB to HSL and Hex</h3>
+                    <h3>RGB to HSL, HSV, and Hex</h3>
                 </div>
                 <form>
                     <div>
-                        <label for="RToHSLToHexInput">R: </label>
-                        <input type="text" class="shortInput" id="RToHSLToHexInput" size="3">
-                        <label for="GToHSLToHexInput">G: </label>
-                        <input type="text" class="shortInput" id="GToHSLToHexInput" size="3">
-                        <label for="BToHSLToHexInput">B: </label>
-                        <input type="text" class="shortInput" id="BToHSLToHexInput" size="3">
-                        <button type="click" id="RGBToHSLToHexButton">Convert</button>
+                        <label for="RInput">R: </label>
+                        <input type="text" class="shortInput" id="RInput" size="3">
+                        <label for="GInput">G: </label>
+                        <input type="text" class="shortInput" id="GInput" size="3">
+                        <label for="BInput">B: </label>
+                        <input type="text" class="shortInput" id="BInput" size="3">
+                        <button type="click" id="RGBButton">Convert</button>
                     </div>
                     <p id="RGBToHSLAnswer">Your RGB code as a HSL code: </p>
+                    <p id="RGBToHSVAnswer">Your RGB code as a HSV code: </p>
                     <p id="RGBToHexAnswer">Your RGB code as a Hex value: </p>
                 </form>
             </div>
-            <div class="convertorCard-3">
+            <div class="convertorCard-4">
                 <div class="convertorCardHeader">
-                    <h3>HSL to Hex and RGB</h3>
+                    <h3>HSL to HSV, Hex, and RGB</h3>
                 </div>
                 <form>
                     <div>
-                        <label for="HToHexToRGBInput">H: </label>
-                        <input type="text" class="shortInput" id="HToHexToRGBInput" size="3">
-                        <label for="SToHexToRGBInput">S: </label>
-                        <input type="text" class="shortInput" id="SToHexToRGBInput" size="3">
-                        <label for="LToHexToRGBInput">L: </label>
-                        <input type="text" class="shortInput" id="LToHexToRGBInput" size="3">
-                        <button type="click" id="HSLToHexToRGBButton">Convert</button>
+                        <label for="HSLHInput">H: </label>
+                        <input type="text" class="shortInput" id="HSLHInput" size="3">
+                        <label for="HSLSInput">S: </label>
+                        <input type="text" class="shortInput" id="HSLSInput" size="3">
+                        <label for="HSLLInput">L: </label>
+                        <input type="text" class="shortInput" id="HSLLInput" size="3">
+                        <button type="click" id="HSLButton">Convert</button>
                     </div>
+                    <p id="HSLToHSVAnswer">Your HSL code as a HSV code: </p>
                     <p id="HSLToHexAnswer">Your HSL code as a Hex value: </p>
                     <p id="HSLToRGBAnswer">Your HSL code as a RGB code: </p>
                 </form>
             </div>
+            <div class="convertorCard-4">
+                <div class="convertorCardHeader">
+                    <h3>HSV to Hex, RGB, and HSL</h3>
+                </div>
+                <form>
+                    <div>
+                        <label for="HSVHInput">H: </label>
+                        <input type="text" class="shortInput" id="HSVHInput" size="3">
+                        <label for="HSVSInput">S: </label>
+                        <input type="text" class="shortInput" id="HSVSInput" size="3">
+                        <label for="HSVVInput">V: </label>
+                        <input type="text" class="shortInput" id="HSVVInput" size="3">
+                        <button type="click" id="HSVButton">Convert</button>
+                    </div>
+                    <p id="HSVToHexAnswer">Your HSV code as a Hex value: </p>
+                    <p id="HSVToRGBAnswer">Your HSV code as a RGB code: </p>
+                    <p id="HSVToHSLAnswer">Your HSV code as a HSL code: </p>
+                </form>
+            </div>
         </div>
     </section>
-    <!--HEX TO RGB TO HSL END-->
+    <!--COLOR CONVERTOR END-->
 
 </body>
 <script src="assets/js/script.js"></script>
