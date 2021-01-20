@@ -329,18 +329,26 @@ function RGBToHSLConversion(RGB) {
     switch (true) {
         case chroma == 0:
             hue = 0;
+            console.log("case 0");
             break;
         case max == red:
             hue = (((green - blue) / chroma) % 6) * 60;
+            console.log("case 1");
             break;
         case max == green:
             hue = (((blue - red) / chroma) + 2) * 60;
+            console.log("case 2");
             break;
         case max == blue:
             hue = (((red - green) / chroma) + 4) * 60;
+            console.log("case 3");
             break;
         default:
             console.log("something went wrong at RGB to HSL hue switch");
+    }
+
+    if (hue < 0){
+        hue += 360;
     }
 
     //Lightness
@@ -376,9 +384,32 @@ function HSVToHSLConversion(HSV){
     let saturation = HSV[1];
     let value = HSV[2];
 
-    let HSLhue = hue;
+    let HSLhue = 0;
     let HSLsaturation = 0;
     let lightness = 0;
+
+    HSLhue = hue;
+
+    lightness = value * (1 - (saturation / 2));
+
+    if (lightness == 0 || lightness == 1){
+        HSLsaturation = 0;
+    }
+    else{
+
+        let min = lightness;
+
+        if(min >= 1 - lightness){
+            min = 1 - lightness;
+        }
+
+        HSLsaturation = (value - lightness) / min;
+    }
+
+    let HSL = [HSLhue, HSLsaturation, lightness];
+
+    return HSL;
+    
 
 }
 //HSV TO HSL END
@@ -386,30 +417,50 @@ function HSVToHSLConversion(HSV){
 //HSL TO HSV START
 function HSLToHSVConversion(HSL){
 
+    console.log("HSL: ", HSL);
+
+    for (let i = 1; i < HSL.length; i++){
+        if(HSL[i] > 1){
+            HSL[i] /= 100;
+        }
+    }
+
     let hue = HSL[0];
     let saturation = HSL[1];
     let lightness = HSL[2];
 
-    let HSVhue = hue;
+
+    let HSVhue = 0;
     let HSVsaturation = 0;
     let value = 0;
 
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    //I WAS HERE
-    value = lightness + saturat
+    let HSV = ["", "", ""];
+
+    let min = lightness;
+
+    if(min >= 1 - lightness){
+        min = 1 - lightness;
+    }
+
+    HSVhue = hue;
+
+    value = lightness + saturation * min;
+
+    if(value == 0){
+        HSVsaturation = 0;
+    }
+    else{
+        HSVsaturation = (2 * (1 - lightness / value));
+    }
+
+    HSVsaturation = Math.round(HSVsaturation * 100)
+    value = Math.round(value * 100);
+
+    HSV = [HSVhue, HSVsaturation, value];
+
+
+
+    return HSV;
 
 }
 //HSL TO HSV END
@@ -435,14 +486,17 @@ function hexController(event) {
 
             RGB = hexToRGBConversion(hexValue);
             HSL = RGBToHSLConversion(RGB);
+            HSV = HSLToHSVConversion(HSL);
 
             hexToRGBAnswer.innerHTML = "Your hex value as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
             hexToHSLAnswer.innerHTML = "Your hex value as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + "% L:" + HSL[2] + "%";
+            hexToHSVAnswer.innerHTML = "Your hex value as a HSV code - H:" + HSV[0] + " S:" + HSV[1] + "% V:" + HSV[2] + "%";
 
         }
         else {
             hexToRGBAnswer.innerHTML = "Input must be a hex value (3 or 6 hexadecimal values)";
             hexToHSLAnswer.innerHTML = "Input must be a hex value (3 or 6 hexadecimal values)";
+            hexToHSVAnswer.innerHTML = "Input must be a hex value (3 or 6 hexadecimal values)";
         }
 
     }
@@ -476,14 +530,17 @@ function RGBController(event) {
         if ((RGB[0] >= 0 && RGB[0] <= 255) && (RGB[1] >= 0 && RGB[1] <= 255) && (RGB[2] >= 0 && RGB[2] <= 255)){
 
             HSL = RGBToHSLConversion(RGB);
+            HSV = HSLToHSVConversion(HSL);
             hexValue = RGBToHexConversion(RGB);
 
             RGBToHexAnswer.innerHTML = "Your RGB code as a Hex value: " + hexValue;
             RGBToHSLAnswer.innerHTML = "Your RGB code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + "% L:" + HSL[2] + "%";
+            RGBToHSVAnswer.innerHTML = "Your RGB code as a HSV code - H:" + HSV[0] + " S:" + HSV[1] + "% V:" + HSV[2] + "%";
 
         }
         else {
             RGBToHSLAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
+            RGBToHSVAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
             RGBToHexAnswer.innerHTML = "All inputs must be an RGB value (0-255)";
         }
 
@@ -504,6 +561,7 @@ function HSLController(event) {
     let lValue = HSLLInput.value;
 
     let HSL = [hValue, sValue, lValue];
+    let HSV = ["", "", ""];
     let RGB = ["", "", ""];
     let hexValue = "";
 
@@ -520,14 +578,22 @@ function HSLController(event) {
         if ((HSL[0] >= 0 && HSL[0] <= 360) && (HSL[1] >= 0 && HSL[1] <= 1) && (HSL[2] >= 0 && HSL[2] <= 1)) {
 
             RGB = HSLToRGBConversion(HSL);
+            HSV = HSLToHSVConversion(HSL);
             hexValue = RGBToHexConversion(RGB);
 
             HSLToRGBAnswer.innerHTML = "Your HSL code as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
+            HSLToHSVAnswer.innerHTML = "Your HSL code as a HSV code - H:" + HSV[0] + " S:" + HSV[1] + "% V:" + HSV[2] + "%";
             HSLToHexAnswer.innerHTML = "Your HSL code as a Hex value: " + hexValue;
 
         }
+        else {
+            HSLToRGBAnswer.innerHTML = "All inputs must be in the correct range - Hue(0-360), Saturation 0-1, Lightness 0-1";
+            HSLToHSVAnswer.innerHTML = "All inputs must be in the correct range - Hue(0-360), Saturation 0-1, Lightness 0-1";
+            HSLToHexAnswer.innerHTML = "All inputs must be in the correct range - Hue(0-360), Saturation 0-1, Lightness 0-1";
+        }
 
     }
+    
 
 }
 //HSL INPUT END
@@ -568,6 +634,11 @@ function HSVController(event) {
             HSVToHexAnswer.innerHTML = "Your HSV code as a Hex value: " + hexValue;
             HSVToHSLAnswer.innerHTML = "Your HSV code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + " L:" + HSL[2];
 
+        }
+        else {
+            HSVToRGBAnswer.innerHTML = "All inputs must be in the correct range - Hue(0-360), Saturation 0-1, Value 0-1";
+            HSVToHSLAnswer.innerHTML = "All inputs must be in the correct range - Hue(0-360), Saturation 0-1, Value 0-1";
+            HSVToHexAnswer.innerHTML = "All inputs must be in the correct range - Hue(0-360), Saturation 0-1, Value 0-1";
         }
 
     }
