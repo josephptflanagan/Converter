@@ -10,4 +10,5 @@ A basic convertor, started with binary to decimal and decimal to binary conversi
 This Convertor could be handled by built in functionality of Javascript, but I wanted to see if I could figure out the algorithm myself, and I believe I have.
 
 ## Color Convertor
-Working on this one at the moment. Adding HSV. I need to improve the documentation, and figure out rounding issues and potential use of regex for input checking
+Hex <--> RGB <--> HSL <--> HSV
+Working on this one at the moment. I need to figure out rounding issues and potential use of regex for input checking.
