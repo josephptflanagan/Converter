@@ -32,7 +32,14 @@ let RGBToHSVAnswer = document.getElementById('RGBToHSVAnswer');
 let HSLToHexAnswer = document.getElementById('HSLToHexAnswer');
 let HSLToRGBAnswer = document.getElementById('HSLToRGBAnswer');
 let HSLToHSVAnswer = document.getElementById('HSLToHSVAnswer');
+let HSVToHexAnswer = document.getElementById('HSVToHexAnswer');
+let HSVToRGBAnswer = document.getElementById('HSVToRGBAnswer');
+let HSVToHSLAnswer = document.getElementById('HSVToHSLAnswer');
 
+let hexSquare = document.getElementById("hexSquare")
+let RGBSquare = document.getElementById("RGBSquare")
+let HSLSquare = document.getElementById("HSLSquare")
+let HSVSquare = document.getElementById("HSVSquare")
 
 //BINARY TO DECIMAL START
 function binaryToDecimal(event) {
@@ -338,19 +345,15 @@ function RGBToHSLConversion(RGB) {
     switch (true) {
         case chroma == 0:
             hue = 0;
-            console.log("case 0");
             break;
         case max == red:
             hue = (((green - blue) / chroma) % 6) * 60;
-            console.log("case 1");
             break;
         case max == green:
             hue = (((blue - red) / chroma) + 2) * 60;
-            console.log("case 2");
             break;
         case max == blue:
             hue = (((red - green) / chroma) + 4) * 60;
-            console.log("case 3");
             break;
         default:
             console.log("something went wrong at RGB to HSL hue switch");
@@ -532,6 +535,8 @@ function hexController(event) {
             hexToHSLAnswer.innerHTML = "Your hex value as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + "% L:" + HSL[2] + "%";
             hexToHSVAnswer.innerHTML = "Your hex value as a HSV code - H:" + HSV[0] + " S:" + HSV[1] + "% V:" + HSV[2] + "%";
 
+            hexSquare.style.backgroundColor = "#" + hexValue;
+
         }
         //non hex values return this message
         else {
@@ -586,6 +591,8 @@ function RGBController(event) {
             RGBToHSLAnswer.innerHTML = "Your RGB code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + "% L:" + HSL[2] + "%";
             RGBToHSVAnswer.innerHTML = "Your RGB code as a HSV code - H:" + HSV[0] + " S:" + HSV[1] + "% V:" + HSV[2] + "%";
 
+            RGBSquare.style.backgroundColor = "#" + hexValue;
+
         }
         //non RGB values return this message
         else {
@@ -638,6 +645,8 @@ function HSLController(event) {
             HSLToHSVAnswer.innerHTML = "Your HSL code as a HSV code - H:" + HSV[0] + " S:" + HSV[1] + "% V:" + HSV[2] + "%";
             HSLToHexAnswer.innerHTML = "Your HSL code as a Hex value: " + hexValue;
 
+            HSLSquare.style.backgroundColor = "#" + hexValue;
+
         }
         //non HSL values return this message
         else {
@@ -689,6 +698,8 @@ function HSVController(event) {
             HSVToRGBAnswer.innerHTML = "Your HSV code as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
             HSVToHexAnswer.innerHTML = "Your HSV code as a Hex value: " + hexValue;
             HSVToHSLAnswer.innerHTML = "Your HSV code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + " L:" + HSL[2];
+
+            HSVSquare.style.backgroundColor = "#" + hexValue;
 
         }
         else {
