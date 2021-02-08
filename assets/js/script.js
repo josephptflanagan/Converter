@@ -312,8 +312,10 @@ function hexadecimalToDecimalConverter(hexadecimalNum){
     
     let decimalNum = 0;
 
+    hexadecimalNum = hexadecimalNum.split("").reverse().join("");
+
     for (let i = 0; i < hexadecimalNum.length; i++) {
-        decimalNum += ((16 * i) + hexToDecimalDictionary[hexadecimalNum[i]]);
+        decimalNum += (Math.pow(16, i) * hexToDecimalDictionary[hexadecimalNum[i]]);
     }
 
     return decimalNum;
