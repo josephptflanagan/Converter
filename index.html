@@ -4,55 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertor</title>
+    <title>Converter</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <header>
-        <h1>Convertors
+        <h1>Converters
     </header>
 
-    <!--BINARY TO DECIMAL TO BINARY START-->
-    <section class="binaryToDecimalToBinaryConvertorSection convertorSection" id="decimalToBinaryToDecimal">
+    <!--BASE CONVERTER START-->
+    <section class="binaryToDecimalToBinaryConverterSection converterSection" id="decimalToBinaryToDecimal">
         <div class="sectionHeader">
-            <h2>Binary to Decimal & Decimal to Binary
+            <h2>Base Converter
         </div>
-        <div class="convertors">
-            <div class="convertorCard-2">
-                <div class="convertorCardHeader">
-                    <h3>Binary to Decimal</h3>
+        <div class="converters">
+            <div class="converterCard-3">
+                <div class="converterCardHeader">
+                    <h3>Binary to Decimal to Hexadecimal</h3>
                 </div>
                 <form>
-                    <label for="bToDInput">Enter your binary number: </label>
-                    <input type="text" id="bToDInput">
-                    <button type="click" id="bToDButton">Convert</button>
+                    <label for="bInput">Enter your binary number: </label>
+                    <input type="text" id="bInput">
+                    <button type="click" id="bButton">Convert</button>
                     <p id="bToDAnswer">Your Binary Number as a Decimal Number: </p>
+                    <p id="bToHAnswer">Your Binary Number as a Hexadecimal Number: </p>
                 </form>
             </div>
-            <div class="convertorCard-2">
-                <div class="convertorCardHeader">
-                    <h3>Decimal to Binary</h3>
+            <div class="converterCard-3">
+                <div class="converterCardHeader">
+                    <h3>Decimal to Hexadecimal to Binary</h3>
                 </div>
                 <form>
-                    <label for="dToBInput">Enter your decimal number: </label>
-                    <input type="text" id="dToBInput">
-                    <button type="click" id="dToBButton">Convert</button>
+                    <label for="dInput">Enter your decimal number: </label>
+                    <input type="text" id="dInput">
+                    <button type="click" id="dButton">Convert</button>
                     <p id="dToBAnswer">Your Decimal Number as a Binary Number: </p>
+                    <p id="dToHAnswer">Your Decimal Number as a Hexadecimal Number: </p>
+                </form>
+            </div>
+            <div class="converterCard-3">
+                <div class="converterCardHeader">
+                    <h3>Hexadecimal to Decimal to Binary</h3>
+                </div>
+                <form>
+                    <label for="hInput">Enter your hexadecimal number: </label>
+                    <input type="text" id="hInput">
+                    <button type="click" id="hButton">Convert</button>
+                    <p id="hToDAnswer">Your Hexadecimal Number as a Decimal Number: </p>
+                    <p id="hToBAnswer">Your Hexadecimal Number as a Binary Number: </p>
                 </form>
             </div>
         </div>
+        
     </section>
-    <!--BINARY TO DECIMAL TO BINARY END-->
+    <!--BASE CONVERTER END-->
 
-    <!--COLOR CONVERTOR START-->
-    <section class="colorConvertor convertorSection" id="colorConvertor">
+    <!--COLOR CONVERTER START-->
+    <section class="colorConverter converterSection" id="colorConverter">
         <div class="sectionHeader">
-            <h2>Color Convertor
+            <h2>Color Converter
         </div>
-        <div class="convertors">
-            <div class="convertorCard-4">
-                <div class="convertorCardHeader">
+        <div class="converters">
+            <div class="converterCard-4">
+                <div class="converterCardHeader">
                     <h3>Hex to RGB, HSL, and HSV</h3>
                     <div class="color-square" id="hexSquare"></div>
                 </div>
@@ -65,8 +80,8 @@
                     <p id="hexToHSVAnswer">Your hex value as a HSV code: </p>
                 </form>
             </div>
-            <div class="convertorCard-4">
-                <div class="convertorCardHeader">
+            <div class="converterCard-4">
+                <div class="converterCardHeader">
                     <h3>RGB to HSL, HSV, and Hex</h3>
                     <div class="color-square" id="RGBSquare"></div>
                 </div>
@@ -85,8 +100,8 @@
                     <p id="RGBToHexAnswer">Your RGB code as a Hex value: </p>
                 </form>
             </div>
-            <div class="convertorCard-4">
-                <div class="convertorCardHeader">
+            <div class="converterCard-4">
+                <div class="converterCardHeader">
                     <h3>HSL to HSV, Hex, and RGB</h3>
                     <div class="color-square" id="HSLSquare"></div>
                 </div>
@@ -105,8 +120,8 @@
                     <p id="HSLToRGBAnswer">Your HSL code as a RGB code: </p>
                 </form>
             </div>
-            <div class="convertorCard-4">
-                <div class="convertorCardHeader">
+            <div class="converterCard-4">
+                <div class="converterCardHeader">
                     <h3>HSV to Hex, RGB, and HSL</h3>
                     <div class="color-square" id="HSVSquare"></div>
                 </div>
@@ -127,7 +142,7 @@
             </div>
         </div>
     </section>
-    <!--COLOR CONVERTOR END-->
+    <!--COLOR CONVERTER END-->
 
 </body>
 <script src="assets/js/script.js"></script>

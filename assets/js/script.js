@@ -1,16 +1,22 @@
-const binaryToDecimalButton = document.getElementById('bToDButton');
-const decimalToBinaryButton = document.getElementById('dToBButton');
+const binaryButton = document.getElementById('bButton');
+const decimalButton = document.getElementById('dButton');
+const hexadecimalButton = document.getElementById('hButton');
 
 const hexButton = document.getElementById('hexButton');
 const RGBButton = document.getElementById('RGBButton');
 const HSLButton = document.getElementById('HSLButton');
 const HSVButton = document.getElementById('HSVButton');
 
-let binaryToDecimalInput = document.getElementById('bToDInput');
-let decimalToBinaryInput = document.getElementById('dToBInput');
+let binaryInput = document.getElementById('bInput');
+let decimalInput = document.getElementById('dInput');
+let hexadecimalInput = document.getElementById('hInput');
 
 let binaryToDecimalAnswer = document.getElementById('bToDAnswer');
+let binaryToHexadecimalAnswer = document.getElementById('bToHAnswer');
+let decimalToHexadecimalAnswer = document.getElementById('dToHAnswer');
 let decimalToBinaryAnswer = document.getElementById('dToBAnswer');
+let hexadecimalToBinaryAnswer = document.getElementById('hToBAnswer');
+let hexadecimalToDecimalAnswer = document.getElementById('hToDAnswer');
 
 let hexInput = document.getElementById('hexInput')
 let RInput = document.getElementById('RInput');
@@ -41,16 +47,16 @@ let RGBSquare = document.getElementById("RGBSquare")
 let HSLSquare = document.getElementById("HSLSquare")
 let HSVSquare = document.getElementById("HSVSquare")
 
-//BINARY TO DECIMAL START
-function binaryToDecimal(event) {
+//BINARY INPUT START
+function binaryInputController(event) {
 
     //prevents the page from refreshing when clicking the submit button
     event.preventDefault();
 
     //grabs the user input value
-    let binaryNum = binaryToDecimalInput.value;
-
+    let binaryNum = binaryInput.value;
     let decimalNum = 0;
+    let hexadecimalNum = "";
 
     //regex to check and ensure the number is a binary number
     let binaryRegex = /^[0-1]+$/;
@@ -61,41 +67,136 @@ function binaryToDecimal(event) {
         //checks that this input is a binary number
         if (binaryNum.match(binaryRegex)) {
 
-            //reverses the binary number to make it easier to use
-            binaryNum = binaryNum.split("").reverse().join("");
+            decimalNum = binaryToDecimalConverter(binaryNum);
+            hexadecimalNum = decimalToHexadecimalConverter(decimalNum);
 
-            for (let i = 0; i < binaryNum.length; i++) {
+            console.log("decimalNum: ", decimalNum);
+            console.log("hexadecimalNum: ", hexadecimalNum);
 
-                //populates the decimal number by adding each binary digit's value to it
-                decimalNum += binaryNum[i] * Math.pow(2, i);
-
-            }
-
-            //populates the answer on the page
+            //populates the answers on the page
             binaryToDecimalAnswer.innerHTML = "Your Binary Number as a Decimal Number: " + decimalNum;
+            binaryToHexadecimalAnswer.innerHTML = "Your Binary Number as a Hexadecimal Number: " + hexadecimalNum;
         }
         //if the input is not a binary number
         else {
             binaryToDecimalAnswer.innerHTML = "Input must be a binary number (1s and 0s)";
+            binaryToHexadecimalAnswer.innerHTML = "Input must be a binary number (1s and 0s)";
         }
 
     }
+
+}
+//BINARY INPUT END
+
+//DECIMAL INPUT START
+function decimalInputController(event) {
+
+    //prevents the page from refreshing when clicking the submit button
+    event.preventDefault();
+
+    //grabs the user input value
+    let decimalNum = decimalInput.value;
+    let hexadecimalNum = "";
+    let binaryNum = "";
+
+    //regex to check and ensure the number is a decimal number
+    let decimalRegex = /^[0-9]+$/;
+
+    //checks that there is user input before proceeding
+    if (decimalNum) {
+
+        //checks that this input is a decimal number
+        if (decimalNum.match(decimalRegex)) {
+
+            hexadecimalNum = decimalToHexadecimalConverter(decimalNum);
+            binaryNum = decimalToBinaryConverter(decimalNum);
+
+            //updates the answer on the page
+            decimalToHexadecimalAnswer.innerHTML = "Your Decimal Number as a Hexadecimal Number: " + hexadecimalNum;
+            decimalToBinaryAnswer.innerHTML = "Your Decimal Number as a Binary Number: " + binaryNum;
+
+
+        }
+        //catch for if user input is not a decimal number
+        else {
+            decimalToHexadecimalAnswer.innerHTML = "Input must be a decimal number";
+            decimalToBinaryAnswer.innerHTML = "Input must be a decimal number";
+        }
+    }
+
+
+}
+//DECIMAL INPUT END
+
+//HEXADECIMAL INPUT START
+function hexadecimalInputController(event) {
+
+    //prevents the page from refreshing when clicking the submit button
+    event.preventDefault();
+
+    //grabs the user input value
+    let hexadecimalNum = hexadecimalInput.value;
+    let binaryNum = "";
+    let decimalNum = 0;
+
+    //regex to check and ensure the value is a hex value
+    let hexRegex = /^[a-f0-9]+$/;
+
+    //checks that there is user input before proceeding
+    if (hexadecimalNum) {
+
+        //checks that this input is a decimal number
+        if (hexadecimalNum.match(hexRegex)) {
+
+            decimalNum = hexadecimalToDecimalConverter(hexadecimalNum);
+            binaryNum = decimalToBinaryConverter(decimalNum);
+
+            //updates the answer on the page
+            hexadecimalToBinaryAnswer.innerHTML = "Your Hexadecimal Number as a Binary Number: " + binaryNum;
+            hexadecimalToDecimalAnswer.innerHTML = "Your Hexadecimal Number as a Decimal Number: " + decimalNum;
+
+        }
+        //catch for if user input is not a decimal number
+        else {
+            hexadecimalToBinaryAnswer.innerHTML = "Input must be a hexadecimal number";
+            hexadecimalToDecimalAnswer.innerHTML = "Input must be a hexadecimal number";
+        }
+    }
+
+    
+
+
+
+}
+//HEXADECIMAL INPUT END
+
+
+//BINARY TO DECIMAL START
+function binaryToDecimalConverter(binaryNum) {
+
+    let decimalNum = 0;
+
+    //reverses the binary number to make it easier to use
+    binaryNum = binaryNum.split("").reverse().join("");
+
+    for (let i = 0; i < binaryNum.length; i++) {
+
+        //populates the decimal number by adding each binary digit's value to it
+        decimalNum += binaryNum[i] * Math.pow(2, i);
+
+    }
+
+    return decimalNum;
 
 };
 //BINARY TO DECIMAL END
 
 //DECIMAL TO BINARY START
-function decimalToBinary(event) {
-
-    //prevents the page from refreshing when clicking the submit button
-    event.preventDefault();
+function decimalToBinaryConverter(decimalNum) {
 
     //This algorithm works by checking increasingly large exponents of 2 against the number. 
     //When the exponent of 2 exceeds the user number, the previous exponent of 2 is subtracted from the decimal number.
     //The algorithm whittles down the decimal number to 0. At 0 the binary number is ready and the while loop ends
-
-    //grabs the user input value
-    let decimalNum = decimalToBinaryInput.value;
 
     //empty array that will store the digits of the binary number
     let binaryNum = [];
@@ -109,111 +210,116 @@ function decimalToBinary(event) {
     //bool that details if this is the first exponent of 2 being subtracted from the user number or not
     let first = true;
 
-    //regex to check and ensure the number is a decimal number
-    let decimalRegex = /^[0-9]+$/;
+    //immediately ejects 0
+    if (decimalNum == 0) {
+        binaryNum.push(decimalNum);
+    }
+    else {
 
-    //for use in testing results
-    let checker = decimalNum;
+        //Main Loop
+        while (decimalNum > 0) {
 
-    //checks that there is user input before proceeding
-    if (decimalNum) {
+            //As the loop starts the previous exponent of 2 is set to the current exponent of 2
+            let lastNum = currentNum;
+            //The current exponent of 2 is updated to the next highest
+            currentNum = Math.pow(2, position);
 
-        //checks that this input is a decimal number
-        if (decimalNum.match(decimalRegex)) {
-
-            //immediately ejects 0
-            if (decimalNum == 0) {
-                binaryNum.push(decimalNum);
+            //if the user number is greater than the current exponent of 2, position increases
+            if (decimalNum > currentNum) {
+                position += 1;
             }
             else {
 
-                //Main Loop
-                while (decimalNum > 0) {
+                //if this is the first time the binaryNum array is being interacted with
+                if (binaryNum.length == 0) {
 
-                    //As the loop starts the previous exponent of 2 is set to the current exponent of 2
-                    let lastNum = currentNum;
-                    //The current exponent of 2 is updated to the next highest
-                    currentNum = Math.pow(2, position);
+                    //this for loop fills every spot with 0's except the last, which gets a 1
+                    for (let i = 0; i < position + 1; i++) {
 
-                    //if the user number is greater than the current exponent of 2, position increases
-                    if (decimalNum > currentNum) {
-                        position += 1;
-                    }
-                    else {
-
-                        //if this is the first time the binaryNum array is being interacted with
-                        if (binaryNum.length == 0) {
-
-                            //this for loop fills every spot with 0's except the last, which gets a 1
-                            for (let i = 0; i < position + 1; i++) {
-
-                                if (i == position) {
-                                    binaryNum[binaryNum.length - 1] = "1";
-                                }
-                                else {
-                                    binaryNum.push("0");
-                                }
-                            }
-
+                        if (i == position) {
+                            binaryNum[binaryNum.length - 1] = "1";
                         }
-                        //as the decimal number decreases, the position will decrease, and lower positions in the array will be replaced with 1's as is warranted. 
                         else {
-                            if (decimalNum == currentNum) {
-                                binaryNum[position] = "1"
-                            }
-                            else {
-                                binaryNum[position - 1] = "1"
-                            }
+                            binaryNum.push("0");
                         }
-
-                        //if the decimal number and exponent of 2 are equal, the exponent of 2 is subtracted from the decimalnumber to make 0
-                        if (decimalNum == currentNum) {
-                            decimalNum = 0;
-                        }
-                        //otherwise the last exponent of 2 is subtracted from 2
-                        else {
-                            decimalNum -= lastNum;
-                        }
-
-                        //a catch for exponents of 2 that cause a mistake in the algorithm otherwise. I will endeavor to figure out why, but without this 2,4,8,16, etc... come out one digit short
-                        if (first && decimalNum == 0) {
-                            binaryNum[binaryNum.length - 1] = "0";
-                            binaryNum.push("1");
-                        }
-
-                        //sets first to false, resets counting and comparing variables
-                        first = false;
-                        position = 0;
-                        currentNum = 0;
-
                     }
 
                 }
+                //as the decimal number decreases, the position will decrease, and lower positions in the array will be replaced with 1's as is warranted. 
+                else {
+                    if (decimalNum == currentNum) {
+                        binaryNum[position] = "1"
+                    }
+                    else {
+                        binaryNum[position - 1] = "1"
+                    }
+                }
+
+                //if the decimal number and exponent of 2 are equal, the exponent of 2 is subtracted from the decimalnumber to make 0
+                if (decimalNum == currentNum) {
+                    decimalNum = 0;
+                }
+                //otherwise the last exponent of 2 is subtracted from 2
+                else {
+                    decimalNum -= lastNum;
+                }
+
+                //a catch for exponents of 2 that cause a mistake in the algorithm otherwise. I will endeavor to figure out why, but without this 2,4,8,16, etc... come out one digit short
+                if (first && decimalNum == 0) {
+                    binaryNum[binaryNum.length - 1] = "0";
+                    binaryNum.push("1");
+                }
+
+                //sets first to false, resets counting and comparing variables
+                first = false;
+                position = 0;
+                currentNum = 0;
+
             }
 
-            //reverses the binaryNum array and turns it into a string
-            let binaryNumStr = binaryNum.reverse().join("");
-
-            //updates the answer on the page
-            decimalToBinaryAnswer.innerHTML = "Your Decimal Number as a Binary Number: " + binaryNumStr;
-
-            //Testing my algorithm against the built in convertor
-            console.log(Number(checker).toString(2));
-            console.log(binaryNumStr);
-            console.log('--------------------');
-
-        }
-        //catch for if user input is not a decimal number
-        else {
-            decimalToBinaryAnswer.innerHTML = "Input must be a decimal number";
         }
     }
+
+    //reverses the binaryNum array and turns it into a string
+    let binaryNumStr = binaryNum.reverse().join("");
+
+    return binaryNumStr;
 
 };
 //DECIMAL TO BINARY END
 
 const hexToDecimalDictionary = { "0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15 };
 const decimalToHexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+
+//DECIMAL TO HEXADECIMAL START
+function decimalToHexadecimalConverter(decimalNum){
+
+    let hexadecimalNum = 0;
+
+    for (let i = 0; i < decimalNum.length; i++) {
+        console.log("entered decimal to hexadecimal conversion loop");
+        hexadecimalNum += decimalToHexArray[(decimalNum[i] - (decimalNum[i] % 16)) / 16]
+        hexadecimalNum += decimalToHexArray[(decimalNum[i] % 16)]
+    }
+
+    return hexadecimalNum;
+
+}
+//DECIMAL TO HEXADECIMAL END
+
+//HEXADECIMAL TO DECIMAL START
+function hexadecimalToDecimalConverter(hexadecimalNum){
+    
+    let decimalNum = 0;
+
+    for (let i = 0; i < hexadecimalNum.length; i++) {
+        decimalNum += ((16 * i) + hexToDecimalDictionary[hexadecimalNum[i]]);
+    }
+
+    return decimalNum;
+
+}
+//HEXADECIMAL TO DECIMAL END
 
 //HEX TO RGB START
 function hexToRGBConversion(hexValue) {
@@ -230,7 +336,7 @@ function hexToRGBConversion(hexValue) {
     let subSections = [subA, subB, subC];
 
     for (let i = 0; i < subSections.length; i++) {
-        subSections[i] = (16 * hexToDecimalDictionary[subSections[i][0]]) + hexToDecimalDictionary[subSections[i][1]];
+        subSections[i] = hexadecimalToDecimalConverter(subSections[i]);
     }
 
     return subSections;
@@ -713,8 +819,9 @@ function HSVController(event) {
 }
 //HSV INPUT END
 
-binaryToDecimalButton.addEventListener("click", binaryToDecimal);
-decimalToBinaryButton.addEventListener("click", decimalToBinary);
+binaryButton.addEventListener("click", binaryInputController);
+decimalButton.addEventListener("click", decimalInputController);
+hexadecimalButton.addEventListener("click", hexadecimalInputController);
 hexButton.addEventListener("click", hexController);
 RGBButton.addEventListener("click", RGBController);
 HSLButton.addEventListener("click", HSLController);
