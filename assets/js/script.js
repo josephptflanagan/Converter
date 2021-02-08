@@ -294,13 +294,19 @@ const decimalToHexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a"
 //DECIMAL TO HEXADECIMAL START
 function decimalToHexadecimalConverter(decimalNum){
 
-    let hexadecimalNum = 0;
+    let hexadecimalNum = "";
+    let quotient = 0;
+    let remainder = 0;
 
-    for (let i = 0; i < decimalNum.length; i++) {
-        console.log("entered decimal to hexadecimal conversion loop");
-        hexadecimalNum += decimalToHexArray[(decimalNum[i] - (decimalNum[i] % 16)) / 16]
-        hexadecimalNum += decimalToHexArray[(decimalNum[i] % 16)]
+    while (decimalNum > 0) {
+        remainder = decimalNum % 16;
+        quotient = (decimalNum - remainder) / 16;
+
+        hexadecimalNum += decimalToHexArray[remainder];
+        decimalNum = quotient;
     }
+
+    hexadecimalNum = hexadecimalNum.split("").reverse().join("");
 
     return hexadecimalNum;
 
