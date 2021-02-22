@@ -104,3 +104,11 @@ h3{
     min-width: 25px;
     min-height: 25px;
 }
+
+.disclaimer{
+    margin-left: 10px;
+}
+
+.disclaimer-paragraph{
+    margin: 1px;
+}

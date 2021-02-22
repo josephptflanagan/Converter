@@ -375,6 +375,10 @@ function HSLToRGBConversion(HSL) {
     let saturation = Number(HSL[1]);
     let lightness = Number(HSL[2]);
 
+    console.log("hue: ", hue);
+    console.log("saturation: ", saturation);
+    console.log("lightness: ", lightness);
+
     if (hue == 360) {
         hue = 0;
     }
@@ -811,7 +815,7 @@ function HSVController(event) {
             //Updating Answer Elements
             HSVToRGBAnswer.innerHTML = "Your HSV code as a RGB code - R:" + RGB[0] + " G:" + RGB[1] + " B:" + RGB[2];
             HSVToHexAnswer.innerHTML = "Your HSV code as a Hex value: " + hexValue;
-            HSVToHSLAnswer.innerHTML = "Your HSV code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + " L:" + HSL[2];
+            HSVToHSLAnswer.innerHTML = "Your HSV code as a HSL code - H:" + HSL[0] + " S:" + HSL[1] + "% L:" + HSL[2] + "% :";
 
             HSVSquare.style.backgroundColor = "#" + hexValue;
 
