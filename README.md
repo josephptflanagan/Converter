@@ -1,7 +1,7 @@
 # Converter
 
 ## Github Pages Site
-[Link](https://josephptflanagan.github.io/Converter/)
+[Link](https://josephptflanagan.github.io/converter/)
 
 ## Description
 A basic converter, started with binary to decimal and decimal to binary conversions, followed by color code conversions. I will add more converters over time.
