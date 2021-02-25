@@ -23,11 +23,8 @@ function Nav(props) {
             <nav>
                 <ul className="flex-row">
                     <li className={`mx-2`}>
-                        <h2 onClick={() => handlePageChange("About")}>Joseph Flanagan</h2>
-                    </li>
-                    <li className={`mx-2 ${currentPage === "About" && `navActive`}`}>
-                        <span onClick={() => handlePageChange("About")} className={currentPage === "About" ? 'nav-link active' : 'nav-link'}>About me</span>
-                    </li>
+                        <h2 onClick={() => handlePageChange("Base")}>Converters</h2>
+                    </li>    
                     {categories.map((category) => (
                         <li
                             className={`mx-1 ${currentPage === capitalizeFirstLetter(category.name) && `navActive`}`}
@@ -41,6 +38,9 @@ function Nav(props) {
                             </span>
                         </li>
                     ))}
+                     <li className={`mx-2 ${currentPage === "About" && `navActive`}`}>
+                        <span onClick={() => handlePageChange("About")} className={currentPage === "About" ? 'nav-link active' : 'nav-link'}>About me</span>
+                    </li>
                 </ul>
             </nav>
         </header>

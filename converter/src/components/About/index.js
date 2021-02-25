@@ -14,7 +14,7 @@ function About() {
                 </p>
                 <br />
                 <p>
-                    If you have any questions, you can <a href="mailto:josephptflanagan@gmail.com"> email me</a>
+                    If you have any questions, you can <a href="mailto:josephptflanagan@gmail.com"> email me</a>.
                 </p>
             </div>
         </section>

@@ -24,7 +24,7 @@ function App() {
       case 'About':
         return <About />;
       default:
-        return <Base />;
+        return <Converters currentCategory={categories[0]}/>;
     }
   };
 
